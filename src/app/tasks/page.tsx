@@ -8,7 +8,7 @@ const TaskPage = async () => {
     setTimeout(() => resolve("data"), 2000);
   });
 
-  const res = await fetch(`${baseUrl}/api/tasks`, { cache: "no-store" });
+  const res = await fetch(`${baseUrl}/api/tasks123`, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to fetch tasks");
   }

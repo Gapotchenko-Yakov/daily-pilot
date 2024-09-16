@@ -1,8 +1,13 @@
 "use client";
-import React from "react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const Error = ({ error }: { error: Error }) => {
-  return <div>Error: {error.message}</div>;
+  return (
+    <Alert className="alert alert--error">
+      <AlertTitle>Error!</AlertTitle>
+      <AlertDescription>{error.message}</AlertDescription>
+    </Alert>
+  );
 };
 
 export default Error;

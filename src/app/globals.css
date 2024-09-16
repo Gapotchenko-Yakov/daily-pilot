@@ -5,12 +5,20 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --loading-background: #f0f4f8; /* Light grey for loading */
+  --loading-text: #333; /* Dark text for loading */
+  --error-background: #fde4e4; /* Light red for error */
+  --error-text: #e53e3e; /* Red text for error */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --loading-background: #1a202c; /* Dark grey for loading */
+    --loading-text: #edf2f7; /* Light text for loading */
+    --error-background: #6c1f1f; /* Dark red for error background in dark mode */
+    --error-text: #f5c6c6; /* Light red text for error in dark mode */
   }
 }
 
@@ -89,4 +97,28 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer components {
+  .alert {
+    @apply w-full max-w-3xl mx-auto mt-20 p-4 rounded-lg shadow-md;
+  }
+
+  .alert__title {
+    @apply text-lg font-semibold;
+  }
+
+  .alert__description {
+    @apply text-sm;
+  }
+}
+
+.alert--loading {
+  background-color: var(--loading-background);
+  color: var(--loading-text);
+}
+
+.alert--error {
+  background-color: var(--error-background);
+  color: var(--error-text);
 }

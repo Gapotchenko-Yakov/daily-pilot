@@ -1,7 +1,10 @@
-import React from "react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-const Loading = () => {
-  return <div>Loading on the App level</div>;
-};
-
-export default Loading;
+export default function Loading() {
+  return (
+    <Alert className="alert alert--loading">
+      <AlertTitle>Loading...</AlertTitle>
+      <AlertDescription>On the app level. </AlertDescription>
+    </Alert>
+  );
+}
