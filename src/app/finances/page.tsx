@@ -1,17 +1,18 @@
 import { FC } from "react";
-import { getFinances } from "@/lib/actions/finances.actions";
-import { notFound } from "next/navigation";
+import { Finance } from "@prisma/client";
 
-const FinancePage: FC = async () => {
-  const { data: finances, error } = await getFinances();
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-  if (error) {
-    return <p>Error: {error}</p>;
+const FinancePage = async () => {
+  await new Promise((resolve, reject) => {
+    setTimeout(() => resolve("data"), 2000);
+  });
+
+  const res = await fetch(`${baseUrl}/api/finances`, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error("Failed to fetch finances");
   }
-
-  if (!finances) {
-    return <p>Loading...</p>;
-  }
+  const finances: Finance[] = await res.json();
 
   return (
     <div>
