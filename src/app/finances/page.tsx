@@ -1,3 +1,4 @@
+import FinanceCharts from "@/components/finances/FinanceCharts";
 import FinanceOverview from "@/components/finances/FinanceOverview";
 import {
   Select,
@@ -38,6 +39,7 @@ const FinancePage = async () => {
       <FinanceOverview />
 
       {/* <!-- Charts Section --> */}
+      <FinanceCharts />
 
       {/* <!-- Transaction List --> */}
 
