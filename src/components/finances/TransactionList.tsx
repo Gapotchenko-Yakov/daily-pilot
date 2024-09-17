@@ -12,7 +12,7 @@ import { Finance, User } from "@prisma/client";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-const FinancePage = async () => {
+const TransactionsList = async () => {
   await new Promise((resolve, reject) => {
     setTimeout(() => resolve("data"), 2000);
   });
@@ -33,15 +33,29 @@ const FinancePage = async () => {
 
   return (
     <div>
-      {/* <!-- Overview Section --> */}
-
-      {/* <!-- Charts Section --> */}
-
-      {/* <!-- Transaction List --> */}
-
-      {/* <!-- Filters Section --> */}
+      <h2>Financial Transactions</h2>
+      <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Users</SelectLabel>
+            {users.map((user) => (
+              <SelectItem value={user.id.toString()}>{user.name}</SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+      <ul>
+        {finances.map((finance) => (
+          <li key={finance.id}>
+            {finance.description}: ${finance.amount.toFixed(2)}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default FinancePage;
+export default TransactionsList;
