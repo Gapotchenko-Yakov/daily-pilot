@@ -32,29 +32,29 @@ const TransactionsList = async () => {
   const users: User[] = await usersRes.json();
 
   return (
-    <div>
-      <h2>Financial Transactions</h2>
-      <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a fruit" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Users</SelectLabel>
-            {users.map((user) => (
-              <SelectItem value={user.id.toString()}>{user.name}</SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <ul>
-        {finances.map((finance) => (
-          <li key={finance.id}>
-            {finance.description}: ${finance.amount.toFixed(2)}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section className="bg-white dark:bg-gray-700 dark:text-white shadow-lg rounded-lg p-6 mb-6">
+      <h2 className="text-2xl font-semibold mb-4">Recent Transactions</h2>
+      <div className="space-y-4">
+        <div className="flex justify-between p-4 border-b border-gray-200 dark:border-gray-600">
+          <div>
+            <h3 className="text-lg font-medium">Transaction #1</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
+              Date: 2024-09-15
+            </p>
+          </div>
+          <span className="text-green-600 font-bold">$200.00</span>
+        </div>
+        <div className="flex justify-between p-4 border-b border-gray-200 dark:border-gray-600">
+          <div>
+            <h3 className="text-lg font-medium">Transaction #2</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
+              Date: 2024-09-14
+            </p>
+          </div>
+          <span className="text-red-600 font-bold">-$50.00</span>
+        </div>
+      </div>
+    </section>
   );
 };
 
