@@ -1,3 +1,4 @@
+import FinanceOverview from "@/components/finances/FinanceOverview";
 import {
   Select,
   SelectContent,
@@ -34,6 +35,7 @@ const FinancePage = async () => {
   return (
     <div>
       {/* <!-- Overview Section --> */}
+      <FinanceOverview />
 
       {/* <!-- Charts Section --> */}
 
