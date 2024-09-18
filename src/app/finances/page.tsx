@@ -1,16 +1,8 @@
 import FinanceCharts from "@/components/finances/FinanceCharts";
+import FinanceFilters from "@/components/finances/FinanceFilters";
 import FinanceOverview from "@/components/finances/FinanceOverview";
 import TransactionsList from "@/components/finances/TransactionList";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import prisma from "@/lib/prisma";
+
 import { Finance, User } from "@prisma/client";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -36,16 +28,13 @@ const FinancePage = async () => {
 
   return (
     <div>
-      {/* <!-- Overview Section --> */}
       <FinanceOverview />
 
-      {/* <!-- Charts Section --> */}
       <FinanceCharts />
 
-      {/* <!-- Transaction List --> */}
       <TransactionsList />
 
-      {/* <!-- Filters Section --> */}
+      <FinanceFilters />
     </div>
   );
 };
