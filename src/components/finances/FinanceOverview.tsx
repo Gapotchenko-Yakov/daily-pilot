@@ -4,7 +4,7 @@ const FinanceOverview = () => {
   return (
     <section className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-6">
       <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
-        Finance Overview
+        Overview
       </h2>
       <div className="flex gap-6">
         <div className="flex-1 bg-green-100 dark:bg-green-900 p-4 rounded-lg shadow-md">
