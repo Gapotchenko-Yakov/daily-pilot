@@ -1,3 +1,14 @@
+// Data Source Configuration
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Generator Configuration
+generator client {
+  provider = "prisma-client-js"
+}
+
 enum TaskStatus {
   PENDING
   COMPLETED
