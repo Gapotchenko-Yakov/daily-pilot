@@ -42,7 +42,6 @@ model User {
   tasks                Task[]
   goals                Goal[]
   habits               Habit[]
-  transactions         Transaction[]
   taskTags             TaskTag[]
   goalTags             GoalTag[]
   transactionTags      TransactionTag[]
@@ -81,13 +80,14 @@ model Goal {
 }
 
 model Habit {
-  id        String          @id @default(uuid())
-  userId    String
-  title     String
-  isPublic  Boolean         @default(false)
-  createdAt DateTime        @default(now())
-  user      User            @relation(fields: [userId], references: [id])
-  tracking  HabitTracking[]
+  id          String          @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  isPublic    Boolean         @default(false)
+  createdAt   DateTime        @default(now())
+  user        User            @relation(fields: [userId], references: [id])
+  tracking    HabitTracking[]
 }
 
 model HabitTracking {
@@ -99,19 +99,16 @@ model HabitTracking {
 }
 
 model Transaction {
-  id               String           @id @default(uuid())
-  fromUserId       String?
-  toUserId         String?
-  type             TransactionType // Enum for type
-  amount           Float
-  transactionTagId String?
-  description      String? // Optional description of the transaction
-  date             DateTime
-  fromUser         User?            @relation("FromUserTransactions", fields: [fromUserId], references: [id])
-  toUser           User?            @relation("ToUserTransactions", fields: [toUserId], references: [id])
-  transactionTags  TransactionTag[]
-  User             User?            @relation(fields: [userId], references: [id])
-  userId           String?
+  id              String           @id @default(uuid())
+  fromUserId      String?
+  toUserId        String?
+  type            TransactionType // Enum for type
+  amount          Float
+  description     String? // Optional description of the transaction
+  date            DateTime
+  fromUser        User?            @relation("FromUserTransactions", fields: [fromUserId], references: [id])
+  toUser          User?            @relation("ToUserTransactions", fields: [toUserId], references: [id])
+  transactionTags TransactionTag[]
 }
 
 model TransactionTag {
