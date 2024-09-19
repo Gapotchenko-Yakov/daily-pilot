@@ -88,7 +88,7 @@ model HabitTracking {
 }
 
 model Transaction {
-  id               String          @id @default(uuid())
+  id               String           @id @default(uuid())
   fromUserId       String?
   toUserId         String?
   type             TransactionType // Enum for type
@@ -96,10 +96,10 @@ model Transaction {
   transactionTagId String?
   description      String? // Optional description of the transaction
   date             DateTime
-  fromUser         User?           @relation("FromUserTransactions", fields: [fromUserId], references: [id])
-  toUser           User?           @relation("ToUserTransactions", fields: [toUserId], references: [id])
-  transactionTag   TransactionTag? @relation(fields: [transactionTagId], references: [id])
-  User             User?           @relation(fields: [userId], references: [id])
+  fromUser         User?            @relation("FromUserTransactions", fields: [fromUserId], references: [id])
+  toUser           User?            @relation("ToUserTransactions", fields: [toUserId], references: [id])
+  transactionTags  TransactionTag[]
+  User             User?            @relation(fields: [userId], references: [id])
   userId           String?
 }
 
@@ -118,7 +118,7 @@ model TaskTag {
   description String? // Optional description of the tag
   taskId      String
   userId      String
-  task        Task    @relation(fields: [taskId], references: [id])
+  tasks       Task[]
   user        User    @relation(fields: [userId], references: [id])
 }
 
@@ -128,7 +128,7 @@ model GoalTag {
   description String? // Optional description of the tag
   goalId      String
   userId      String
-  goal        Goal    @relation(fields: [goalId], references: [id])
+  goals       Goal[]
   user        User    @relation(fields: [userId], references: [id])
 }
 
