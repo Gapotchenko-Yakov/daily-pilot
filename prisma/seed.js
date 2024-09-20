@@ -874,107 +874,78 @@ const main = async () => {
   await prisma.goalReminder.deleteMany();
   await prisma.taskReminder.deleteMany();
 
-  // Add new data
-  const users = await Promise.all(
-    userList.map((user) =>
-      prisma.user.create({
-        data: { name: user.name, email: user.email, password: user.password },
-      })
-    )
-  );
-
-  const taskTags = await Promise.all(
-    taskTagList.map((tag) =>
-      prisma.taskTag.create({
-        data: {
-          name: tag.name,
-          description: tag.description,
-          userId: users.find((user) => user.email === tag.userEmail).id,
-        },
-      })
-    )
-  );
-
-  const goalTags = await Promise.all(
-    goalTagList.map((tag) =>
-      prisma.goalTag.create({
-        data: {
-          name: tag.name,
-          description: tag.description,
-          userId: users.find((user) => user.email === tag.userEmail).id,
-        },
-      })
-    )
-  );
-
-  const habitTags = await Promise.all(
-    habitTagList.map((tag) =>
-      prisma.habitTag.create({
-        data: {
-          name: tag.name,
-          description: tag.description,
-          userId: users.find((user) => user.email === tag.userEmail).id,
-        },
-      })
-    )
-  );
-
-  for (const user of users) {
-    // Create transactions
-    await Promise.all(
-      transactionsList.map((transaction) =>
-        prisma.transaction.create({
-          data: {
-            description: transaction.description,
-            amount: transaction.amount,
+  for (const user of userList) {
+    const createdUser = await prisma.user.create({
+      data: {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        profilePicture: user.profilePicture,
+        bio: user.bio,
+        settings: user.settings,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        lastLogin: user.lastLogin,
+        preferences: user.preferences,
+        transactions: {
+          create: user.transactions.map((transaction) => ({
             type: transaction.type,
-            date: new Date(),
-            userId: user.id,
-          },
-        })
-      )
-    );
-
-    // Create tasks
-    await Promise.all(
-      taskList.map((task) =>
-        prisma.task.create({
-          data: {
+            amount: transaction.amount,
+            description: transaction.description,
+            date: transaction.date,
+            transactionTags: {
+              create: transaction.transactionTags.map((tag) => ({
+                name: tag.name,
+                description: tag.description,
+              })),
+            },
+          })),
+        },
+        tasks: {
+          create: user.tasks.map((task) => ({
             title: task.title,
             description: task.description,
-            dueDate: new Date(),
-            status: "PENDING",
-            userId: user.id,
-          },
-        })
-      )
-    );
-
-    // Create habits
-    await Promise.all(
-      habitList.map((habit) =>
-        prisma.habit.create({
-          data: {
-            title: habit.title,
-            description: habit.description,
-            userId: user.id,
-          },
-        })
-      )
-    );
-
-    // Create goals
-    await Promise.all(
-      goalList.map((goal) =>
-        prisma.goal.create({
-          data: {
+            status: task.status,
+            priority: task.priority,
+            dueDate: task.dueDate,
+            taskTags: {
+              create: task.taskTags.map((tag) => ({
+                name: tag.name,
+                description: tag.description,
+              })),
+            },
+          })),
+        },
+        goals: {
+          create: user.goals.map((goal) => ({
             title: goal.title,
             description: goal.description,
-            userId: user.id,
-          },
-        })
-      )
-    );
+            priority: goal.priority,
+            dueDate: goal.dueDate,
+            taskTags: {
+              create: goal.goalTags.map((tag) => ({
+                name: tag.name,
+                description: tag.description,
+              })),
+            },
+          })),
+        },
+        habits: {
+          create: user.habits.map((habit) => ({
+            title: habit.title,
+            description: habit.description,
+            isPublic: habit.isPublic,
+            tracking: {
+              create: habit.tracking.map((track) => ({
+                date: track.date,
+                status: track.status,
+              })),
+            },
+          })),
+        },
+      },
+    });
+    console.log(`Created user: ${createdUser.name}`);
   }
 
   console.log("Seed data inserted");
