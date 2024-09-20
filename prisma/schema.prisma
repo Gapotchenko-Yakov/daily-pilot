@@ -17,6 +17,7 @@ enum TaskStatus {
 }
 
 enum HabitStatus {
+  PENDING
   COMPLETED
   SKIPPED
   MISSED

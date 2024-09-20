@@ -23,7 +23,7 @@ const userList = [
       {
         title: "Try new recipes",
         isPublic: true,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
       {
         title: "Drink 2 liters of water",
@@ -53,7 +53,7 @@ const userList = [
       {
         title: "Attend cooking classes",
         isPublic: true,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
       {
         title: "Journal daily",
@@ -63,7 +63,7 @@ const userList = [
       {
         title: "Plan weekly meals",
         isPublic: true,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
     ],
     goals: [
@@ -353,7 +353,7 @@ const userList = [
       {
         title: "Learn a new programming language",
         isPublic: true,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
       {
         title: "Attend tech meetups",
@@ -378,7 +378,7 @@ const userList = [
       {
         title: "Build personal projects",
         isPublic: true,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
       {
         title: "Join coding challenges",
@@ -393,7 +393,7 @@ const userList = [
       {
         title: "Practice public speaking",
         isPublic: false,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
     ],
     goals: [
@@ -681,7 +681,7 @@ const userList = [
       {
         title: "Take daily photos",
         isPublic: true,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
       {
         title: "Explore a new trail",
@@ -706,7 +706,7 @@ const userList = [
       {
         title: "Plan a road trip",
         isPublic: true,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
       {
         title: "Attend outdoor workshops",
@@ -716,7 +716,7 @@ const userList = [
       {
         title: "Create a nature journal",
         isPublic: false,
-        tracking: [{ date: new Date(), status: "IN_PROGRESS" }],
+        tracking: [{ date: new Date(), status: "PENDING" }],
       },
       {
         title: "Practice mindfulness outdoors",
@@ -989,17 +989,18 @@ const userList = [
 
 const main = async () => {
   // Delete old data from all tables
+
+  await prisma.habitTracking.deleteMany();
+  await prisma.goalReminder.deleteMany();
+  await prisma.taskReminder.deleteMany();
   await prisma.task.deleteMany();
   await prisma.habit.deleteMany();
   await prisma.goal.deleteMany();
   await prisma.transaction.deleteMany();
-  await prisma.user.deleteMany();
   await prisma.taskTag.deleteMany();
   await prisma.transactionTag.deleteMany();
   await prisma.goalTag.deleteMany();
-  await prisma.habitTracking.deleteMany();
-  await prisma.goalReminder.deleteMany();
-  await prisma.taskReminder.deleteMany();
+  await prisma.user.deleteMany();
 
   for (const user of userList) {
     const createdUser = await prisma.user.create({
@@ -1014,65 +1015,89 @@ const main = async () => {
         updatedAt: user.updatedAt,
         lastLogin: user.lastLogin,
         preferences: user.preferences,
-        transactions: {
-          create: user.transactions.map((transaction) => ({
-            type: transaction.type,
-            amount: transaction.amount,
-            description: transaction.description,
-            date: transaction.date,
-            // transactionTags: {
-            //   create: transaction.tags.map((tag) => ({
-            //     name: tag.name,
-            //     description: tag.description,
-            //   })),
-            // },
-          })),
-        },
-        tasks: {
-          create: user.tasks.map((task) => ({
-            title: task.title,
-            description: task.description,
-            status: task.status,
-            priority: task.priority,
-            dueDate: task.dueDate,
-            // taskTags: {
-            //   create: task.tags.map((tag) => ({
-            //     name: tag.name,
-            //     description: tag.description,
-            //   })),
-            // },
-          })),
-        },
-        goals: {
-          create: user.goals.map((goal) => ({
-            title: goal.title,
-            description: goal.description,
-            priority: goal.priority,
-            dueDate: goal.dueDate,
-            // taskTags: {
-            //   create: goal.tags.map((tag) => ({
-            //     name: tag.name,
-            //     description: tag.description,
-            //   })),
-            // },
-          })),
-        },
-        habits: {
-          create: user.habits.map((habit) => ({
-            title: habit.title,
-            description: habit.description,
-            isPublic: habit.isPublic,
-            // tracking: {
-            //   create: habit.tracking.map((track) => ({
-            //     date: track.date,
-            //     status: track.status,
-            //   })),
-            // },
-          })),
-        },
       },
     });
+
     console.log(`Created user: ${createdUser.name}`);
+
+    for (const transaction of user.transactions) {
+      const createdTransaction = await prisma.transaction.create({
+        data: {
+          userId: createdUser.id,
+          type: transaction.type,
+          amount: transaction.amount,
+          description: transaction.description,
+          date: transaction.date,
+          transactionTags: {
+            create: transaction.transactionTags.map((tag) => ({
+              name: tag.name,
+              description: tag.description,
+              userId: createdUser.id,
+            })),
+          },
+        },
+      });
+      console.log(`Created transaction: ${createdTransaction.title}`);
+    }
+
+    for (const task of user.tasks) {
+      const createdTask = await prisma.task.create({
+        data: {
+          userId: createdUser.id,
+          title: task.title,
+          description: task.description,
+          status: task.status,
+          priority: task.priority,
+          dueDate: task.dueDate,
+          tags: {
+            create: task.tags.map((tag) => ({
+              name: tag.name,
+              description: tag.description,
+              userId: createdUser.id,
+            })),
+          },
+        },
+      });
+      console.log(`Created task: ${createdTask.title}`);
+    }
+
+    for (const goal of user.goals) {
+      const createdGoal = await prisma.goal.create({
+        data: {
+          userId: createdUser.id,
+          title: goal.title,
+          description: goal.description,
+          priority: goal.priority,
+          dueDate: goal.dueDate,
+          tags: {
+            create: goal.tags.map((tag) => ({
+              name: tag.name,
+              description: tag.description,
+              userId: createdUser.id,
+            })),
+          },
+        },
+      });
+      console.log(`Created goal: ${createdGoal.title}`);
+    }
+
+    for (const habit of user.habits) {
+      const createdHabit = await prisma.habit.create({
+        data: {
+          userId: createdUser.id,
+          title: habit.title,
+          description: habit.description,
+          isPublic: habit.isPublic,
+          tracking: {
+            create: habit.tracking.map((track) => ({
+              date: track.date,
+              status: track.status,
+            })),
+          },
+        },
+      });
+      console.log(`Created habit: ${createdHabit.title}`);
+    }
   }
 
   console.log("Seed data inserted");
