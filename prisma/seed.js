@@ -3,27 +3,6 @@ import { getRandomInt } from "../src/lib/utils";
 
 const prisma = new PrismaClient();
 
-const startDate = new Date("2023-01-01");
-const dateList = Array.from({ length: 10 }, (_, i) => {
-  const date = new Date(startDate);
-  date.setDate(startDate.getDate() + i);
-  return date.toISOString().split("T")[0]; // Format date as YYYY-MM-DD
-});
-
-// Sample transactions
-const transactionsList = [
-  { description: "Salary payment", amount: 3000, type: "INCOME" },
-  { description: "Grocery shopping", amount: -150, type: "EXPENSE" },
-  { description: "Monthly rent", amount: -1200, type: "EXPENSE" },
-  { description: "Freelance project payment", amount: 500, type: "INCOME" },
-  { description: "Gym membership", amount: -50, type: "EXPENSE" },
-  { description: "Gift from a friend", amount: 100, type: "INCOME" },
-  { description: "Dinner at a restaurant", amount: -75, type: "EXPENSE" },
-  { description: "Online course purchase", amount: -200, type: "EXPENSE" },
-  { description: "Selling old furniture", amount: 150, type: "INCOME" },
-  { description: "Emergency car repair", amount: -300, type: "EXPENSE" },
-];
-
 const userList = [
   {
     name: "Alice",
@@ -242,6 +221,78 @@ const userList = [
         reminders: [{ reminderTime: new Date("2024-09-25T09:00:00Z") }],
       },
     ],
+    transactions: [
+      {
+        title: "Grocery shopping",
+        amount: 50.0,
+        date: new Date("2024-09-18"),
+        category: "Food",
+        tags: ["Groceries", "Healthy"],
+      },
+      {
+        title: "Running shoes",
+        amount: 120.0,
+        date: new Date("2024-09-15"),
+        category: "Sports",
+        tags: ["Fitness", "Equipment"],
+      },
+      {
+        title: "Cooking class fee",
+        amount: 75.0,
+        date: new Date("2024-09-10"),
+        category: "Education",
+        tags: ["Cooking", "Learning"],
+      },
+      {
+        title: "Dinner party expenses",
+        amount: 100.0,
+        date: new Date("2024-09-08"),
+        category: "Food",
+        tags: ["Social", "Cooking"],
+      },
+      {
+        title: "Photography workshop",
+        amount: 200.0,
+        date: new Date("2024-09-05"),
+        category: "Education",
+        tags: ["Photography", "Skills"],
+      },
+      {
+        title: "Marathon entry fee",
+        amount: 50.0,
+        date: new Date("2024-08-30"),
+        category: "Sports",
+        tags: ["Fitness", "Events"],
+      },
+      {
+        title: "Cookbook purchase",
+        amount: 30.0,
+        date: new Date("2024-09-01"),
+        category: "Books",
+        tags: ["Cooking", "Learning"],
+      },
+      {
+        title: "Yoga class pass",
+        amount: 40.0,
+        date: new Date("2024-09-03"),
+        category: "Health",
+        tags: ["Fitness", "Wellness"],
+      },
+      {
+        title: "Food festival tickets",
+        amount: 60.0,
+        date: new Date("2024-09-20"),
+        category: "Entertainment",
+        tags: ["Food", "Events"],
+      },
+      {
+        title: "New recipe ingredients",
+        amount: 25.0,
+        date: new Date("2024-09-17"),
+        category: "Food",
+        tags: ["Cooking", "Groceries"],
+      },
+    ],
   },
   {
     name: "Bob",
@@ -450,6 +501,78 @@ const userList = [
         priority: 1,
         dueDate: new Date("2024-10-02"),
         reminders: [{ reminderTime: new Date("2024-10-01T09:00:00Z") }],
+      },
+    ],
+    transactions: [
+      {
+        title: "Book purchase",
+        amount: 20.0,
+        date: new Date("2024-09-18"),
+        category: "Books",
+        tags: ["Reading", "Knowledge"],
+      },
+      {
+        title: "Online course fee",
+        amount: 150.0,
+        date: new Date("2024-09-15"),
+        category: "Education",
+        tags: ["Learning", "Tech"],
+      },
+      {
+        title: "Tech meetup ticket",
+        amount: 30.0,
+        date: new Date("2024-09-10"),
+        category: "Networking",
+        tags: ["Tech", "Events"],
+      },
+      {
+        title: "Gadget purchase",
+        amount: 200.0,
+        date: new Date("2024-09-08"),
+        category: "Electronics",
+        tags: ["Tech", "Equipment"],
+      },
+      {
+        title: "Coffee with friends",
+        amount: 15.0,
+        date: new Date("2024-09-05"),
+        category: "Food",
+        tags: ["Social", "Networking"],
+      },
+      {
+        title: "Coding challenge registration",
+        amount: 25.0,
+        date: new Date("2024-08-30"),
+        category: "Competitions",
+        tags: ["Coding", "Events"],
+      },
+      {
+        title: "Webinar fee",
+        amount: 10.0,
+        date: new Date("2024-09-01"),
+        category: "Education",
+        tags: ["Learning", "Webinars"],
+      },
+      {
+        title: "Public speaking workshop",
+        amount: 100.0,
+        date: new Date("2024-09-03"),
+        category: "Education",
+        tags: ["Skills", "Speaking"],
+      },
+      {
+        title: "Networking dinner",
+        amount: 80.0,
+        date: new Date("2024-09-20"),
+        category: "Food",
+        tags: ["Networking", "Social"],
+      },
+      {
+        title: "Coding book",
+        amount: 25.0,
+        date: new Date("2024-09-17"),
+        category: "Books",
+        tags: ["Coding", "Learning"],
       },
     ],
   },
@@ -662,22 +785,94 @@ const userList = [
         reminders: [{ reminderTime: new Date("2024-10-01T09:00:00Z") }],
       },
     ],
+    transactions: [
+      {
+        title: "Camping gear purchase",
+        amount: 150.0,
+        date: new Date("2024-09-18"),
+        category: "Gear",
+        tags: ["Camping", "Equipment"],
+      },
+      {
+        title: "Photography workshop",
+        amount: 200.0,
+        date: new Date("2024-09-15"),
+        category: "Education",
+        tags: ["Photography", "Skills"],
+      },
+      {
+        title: "Nature retreat",
+        amount: 300.0,
+        date: new Date("2024-09-10"),
+        category: "Travel",
+        tags: ["Adventure", "Nature"],
+      },
+      {
+        title: "Hiking guidebook",
+        amount: 25.0,
+        date: new Date("2024-09-08"),
+        category: "Books",
+        tags: ["Hiking", "Adventure"],
+      },
+      {
+        title: "Outdoor workshop fee",
+        amount: 100.0,
+        date: new Date("2024-09-05"),
+        category: "Education",
+        tags: ["Nature", "Skills"],
+      },
+      {
+        title: "Travel insurance",
+        amount: 50.0,
+        date: new Date("2024-08-30"),
+        category: "Insurance",
+        tags: ["Travel", "Safety"],
+      },
+      {
+        title: "Park entrance fee",
+        amount: 20.0,
+        date: new Date("2024-09-01"),
+        category: "Travel",
+        tags: ["Nature", "Adventure"],
+      },
+      {
+        title: "Photography supplies",
+        amount: 80.0,
+        date: new Date("2024-09-03"),
+        category: "Equipment",
+        tags: ["Photography", "Supplies"],
+      },
+      {
+        title: "Camping trip expenses",
+        amount: 100.0,
+        date: new Date("2024-09-20"),
+        category: "Travel",
+        tags: ["Camping", "Adventure"],
+      },
+      {
+        title: "Trail maps purchase",
+        amount: 15.0,
+        date: new Date("2024-09-17"),
+        category: "Books",
+        tags: ["Hiking", "Maps"],
+      },
+    ],
   },
 ];
 
 const main = async () => {
   // Delete old data from all tables
-  await prisma.task.deleteMany({});
-  await prisma.habit.deleteMany({});
-  await prisma.goal.deleteMany({});
-  await prisma.transaction.deleteMany({});
-  await prisma.user.deleteMany({});
-  await prisma.taskTag.deleteMany({});
-  await prisma.habitTag.deleteMany({});
-  await prisma.goalTag.deleteMany({});
-  await prisma.habitTracking.deleteMany({});
-  await prisma.goalReminder.deleteMany({});
-  await prisma.taskReminder.deleteMany({});
+  await prisma.task.deleteMany();
+  await prisma.habit.deleteMany();
+  await prisma.goal.deleteMany();
+  await prisma.transaction.deleteMany();
+  await prisma.user.deleteMany();
+  await prisma.taskTag.deleteMany();
+  await prisma.habitTag.deleteMany();
+  await prisma.goalTag.deleteMany();
+  await prisma.habitTracking.deleteMany();
+  await prisma.goalReminder.deleteMany();
+  await prisma.taskReminder.deleteMany();
 
   // Add new data
   const users = await Promise.all(
