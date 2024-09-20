@@ -73,6 +73,10 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-06-01"),
         tags: [{ name: "Fitness" }, { name: "Running" }, { name: "Health" }],
+        reminders: [
+          { reminderTime: new Date("2025-05-01") },
+          { reminderTime: new Date("2025-05-15") },
+        ],
       },
       {
         title: "Become a gourmet cook",
@@ -80,6 +84,10 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-01-01"),
         tags: [{ name: "Cooking" }, { name: "Food" }, { name: "Skills" }],
+        reminders: [
+          { reminderTime: new Date("2024-12-01") },
+          { reminderTime: new Date("2024-12-15") },
+        ],
       },
       {
         title: "Improve my photography skills",
@@ -87,6 +95,10 @@ const userList = [
         priority: 3,
         dueDate: new Date("2025-03-01"),
         tags: [{ name: "Photography" }, { name: "Skills" }],
+        reminders: [
+          { reminderTime: new Date("2025-02-01") },
+          { reminderTime: new Date("2025-02-15") },
+        ],
       },
       {
         title: "Travel to 5 new countries",
@@ -94,6 +106,10 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-12-31"),
         tags: [{ name: "Travel" }, { name: "Adventure" }],
+        reminders: [
+          { reminderTime: new Date("2025-11-01") },
+          { reminderTime: new Date("2025-12-01") },
+        ],
       },
       {
         title: "Host dinner parties",
@@ -101,6 +117,10 @@ const userList = [
         priority: 3,
         dueDate: new Date("2025-09-01"),
         tags: [{ name: "Social" }, { name: "Food" }],
+        reminders: [
+          { reminderTime: new Date("2025-08-01") },
+          { reminderTime: new Date("2025-08-15") },
+        ],
       },
       {
         title: "Start a food blog",
@@ -108,6 +128,10 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-07-01"),
         tags: [{ name: "Writing" }, { name: "Food" }],
+        reminders: [
+          { reminderTime: new Date("2025-06-01") },
+          { reminderTime: new Date("2025-06-15") },
+        ],
       },
       {
         title: "Join a local running club",
@@ -115,6 +139,7 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-05-01"),
         tags: [{ name: "Community" }],
+        reminders: [{ reminderTime: new Date("2025-04-01") }],
       },
       {
         title: "Learn about nutrition",
@@ -122,6 +147,7 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-04-01"),
         tags: [{ name: "Health" }, { name: "Knowledge" }],
+        reminders: [{ reminderTime: new Date("2025-03-01") }],
       },
       {
         title: "Attend food festivals",
@@ -129,6 +155,7 @@ const userList = [
         priority: 3,
         dueDate: new Date("2025-10-01"),
         tags: [{ name: "Food" }],
+        reminders: [{ reminderTime: new Date("2025-09-01") }],
       },
       {
         title: "Volunteer for a food bank",
@@ -136,8 +163,10 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-11-01"),
         tags: [{ name: "Charity" }],
+        reminders: [{ reminderTime: new Date("2025-10-01") }],
       },
     ],
+
     tasks: [
       {
         title: "Plan my next run",
@@ -403,6 +432,10 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-06-01"),
         tags: [{ name: "Career" }, { name: "Tech" }],
+        reminders: [
+          { reminderTime: new Date("2025-05-01") },
+          { reminderTime: new Date("2025-05-15") },
+        ],
       },
       {
         title: "Read 30 books this year",
@@ -410,6 +443,10 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-01-01"),
         tags: [{ name: "Reading" }, { name: "Knowledge" }],
+        reminders: [
+          { reminderTime: new Date("2024-12-01") },
+          { reminderTime: new Date("2024-12-15") },
+        ],
       },
       {
         title: "Contribute to open source",
@@ -417,6 +454,10 @@ const userList = [
         priority: 3,
         dueDate: new Date("2025-03-01"),
         tags: [{ name: "Community" }],
+        reminders: [
+          { reminderTime: new Date("2025-02-01") },
+          { reminderTime: new Date("2025-02-15") },
+        ],
       },
       {
         title: "Start a tech blog",
@@ -424,6 +465,7 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-04-01"),
         tags: [{ name: "Writing" }, { name: "Tech" }],
+        reminders: [{ reminderTime: new Date("2025-03-01") }],
       },
       {
         title: "Attend a tech conference",
@@ -431,6 +473,7 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-07-01"),
         tags: [{ name: "Networking" }],
+        reminders: [{ reminderTime: new Date("2025-06-01") }],
       },
       {
         title: "Build a portfolio website",
@@ -438,6 +481,7 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-05-01"),
         tags: [{ name: "Web Development" }],
+        reminders: [{ reminderTime: new Date("2025-04-01") }],
       },
       {
         title: "Learn about AI",
@@ -445,6 +489,7 @@ const userList = [
         priority: 3,
         dueDate: new Date("2025-12-31"),
         tags: [{ name: "AI" }],
+        reminders: [{ reminderTime: new Date("2025-11-01") }],
       },
       {
         title: "Get a tech certification",
@@ -452,6 +497,7 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-10-01"),
         tags: [{ name: "Certification" }],
+        reminders: [{ reminderTime: new Date("2025-09-01") }],
       },
       {
         title: "Join a hackathon",
@@ -459,6 +505,7 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-09-01"),
         tags: [{ name: "Competitions" }],
+        reminders: [{ reminderTime: new Date("2025-08-01") }],
       },
       {
         title: "Create a mobile app",
@@ -466,8 +513,10 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-08-01"),
         tags: [{ name: "Apps" }],
+        reminders: [{ reminderTime: new Date("2025-07-01") }],
       },
     ],
+
     tasks: [
       {
         title: "Finish reading 'Clean Code'",
@@ -731,6 +780,7 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-06-01"),
         tags: [{ name: "Adventure" }, { name: "Outdoor" }],
+        reminders: [{ reminderTime: new Date("2025-05-01") }],
       },
       {
         title: "Start a photography portfolio",
@@ -738,6 +788,7 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-01-01"),
         tags: [{ name: "Photography" }, { name: "Art" }],
+        reminders: [{ reminderTime: new Date("2024-12-01") }],
       },
       {
         title: "Travel to national parks",
@@ -745,6 +796,7 @@ const userList = [
         priority: 3,
         dueDate: new Date("2025-03-01"),
         tags: [{ name: "Travel" }],
+        reminders: [{ reminderTime: new Date("2025-02-01") }],
       },
       {
         title: "Learn wildlife photography",
@@ -752,6 +804,7 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-04-01"),
         tags: [{ name: "Photography" }, { name: "Wildlife" }],
+        reminders: [{ reminderTime: new Date("2025-03-01") }],
       },
       {
         title: "Volunteer for environmental causes",
@@ -759,6 +812,7 @@ const userList = [
         priority: 3,
         dueDate: new Date("2025-07-01"),
         tags: [{ name: "Community" }],
+        reminders: [{ reminderTime: new Date("2025-06-01") }],
       },
       {
         title: "Plan a solo hiking trip",
@@ -766,6 +820,7 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-08-01"),
         tags: [{ name: "Adventure" }],
+        reminders: [{ reminderTime: new Date("2025-07-01") }],
       },
       {
         title: "Join a photography exhibition",
@@ -773,6 +828,7 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-09-01"),
         tags: [{ name: "Exhibition" }, { name: "Art" }],
+        reminders: [{ reminderTime: new Date("2025-08-01") }],
       },
       {
         title: "Create an outdoor vlog",
@@ -780,6 +836,7 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-10-01"),
         tags: [{ name: "Vlog" }, { name: "Adventure" }],
+        reminders: [{ reminderTime: new Date("2025-09-01") }],
       },
       {
         title: "Run a nature workshop",
@@ -787,6 +844,7 @@ const userList = [
         priority: 2,
         dueDate: new Date("2025-12-31"),
         tags: [{ name: "Teaching" }, { name: "Nature" }],
+        reminders: [{ reminderTime: new Date("2025-11-30") }],
       },
       {
         title: "Build a camping gear collection",
@@ -794,8 +852,10 @@ const userList = [
         priority: 1,
         dueDate: new Date("2025-11-01"),
         tags: [{ name: "Gear" }, { name: "Camping" }],
+        reminders: [{ reminderTime: new Date("2025-10-01") }],
       },
     ],
+
     tasks: [
       {
         title: "Plan a weekend hike",
@@ -1037,7 +1097,7 @@ const main = async () => {
           },
         },
       });
-      console.log(`Created transaction: ${createdTransaction.title}`);
+      console.log(`Created transaction: ${createdTransaction.description}`);
     }
 
     for (const task of user.tasks) {
@@ -1054,6 +1114,11 @@ const main = async () => {
               name: tag.name,
               description: tag.description,
               userId: createdUser.id,
+            })),
+          },
+          reminders: {
+            create: task.reminders.map((reminder) => ({
+              reminderTime: reminder.reminderTime,
             })),
           },
         },
@@ -1074,6 +1139,11 @@ const main = async () => {
               name: tag.name,
               description: tag.description,
               userId: createdUser.id,
+            })),
+          },
+          reminders: {
+            create: goal.reminders.map((reminder) => ({
+              reminderTime: reminder.reminderTime,
             })),
           },
         },
