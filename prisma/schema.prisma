@@ -28,25 +28,24 @@ enum TransactionType {
 }
 
 model User {
-  id                   String           @id @default(uuid())
-  name                 String
-  email                String           @unique
-  password             String
-  profilePicture       String? // URL to the profile picture
-  bio                  String? // Short biography of the user
-  settings             Json? // User settings (e.g., theme, notifications)
-  createdAt            DateTime         @default(now())
-  updatedAt            DateTime         @updatedAt
-  lastLogin            DateTime?
-  preferences          Json? // User preferences (e.g., language, timezone)
-  tasks                Task[]
-  goals                Goal[]
-  habits               Habit[]
-  taskTags             TaskTag[]
-  goalTags             GoalTag[]
-  transactionTags      TransactionTag[]
-  transactionsSent     Transaction[]    @relation("FromUserTransactions")
-  transactionsReceived Transaction[]    @relation("ToUserTransactions")
+  id              String           @id @default(uuid())
+  name            String
+  email           String           @unique
+  password        String
+  profilePicture  String? // URL to the profile picture
+  bio             String? // Short biography of the user
+  settings        Json? // User settings (e.g., theme, notifications)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  lastLogin       DateTime?
+  preferences     Json? // User preferences (e.g., language, timezone)
+  tasks           Task[]
+  goals           Goal[]
+  habits          Habit[]
+  taskTags        TaskTag[]
+  goalTags        GoalTag[]
+  transactionTags TransactionTag[]
+  transactions    Transaction[]
 }
 
 model Task {
@@ -100,14 +99,12 @@ model HabitTracking {
 
 model Transaction {
   id              String           @id @default(uuid())
-  fromUserId      String?
-  toUserId        String?
+  userId          String?
   type            TransactionType // Enum for type
   amount          Float
   description     String? // Optional description of the transaction
   date            DateTime
-  fromUser        User?            @relation("FromUserTransactions", fields: [fromUserId], references: [id])
-  toUser          User?            @relation("ToUserTransactions", fields: [toUserId], references: [id])
+  user            User?            @relation(fields: [userId], references: [id])
   transactionTags TransactionTag[]
 }
 
