@@ -1,5 +1,4 @@
 const { PrismaClient } = require("@prisma/client");
-import { getRandomInt } from "../src/lib/utils";
 
 const prisma = new PrismaClient();
 
@@ -146,6 +145,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-25"),
+        tags: [{ name: "Running" }, { name: "Planning" }],
         reminders: [{ reminderTime: new Date("2024-09-24T09:00:00Z") }],
       },
       {
@@ -154,6 +154,7 @@ const userList = [
         status: "IN_PROGRESS",
         priority: 1,
         dueDate: new Date("2024-09-21"),
+        tags: [{ name: "Shopping" }, { name: "Food" }],
         reminders: [{ reminderTime: new Date("2024-09-20T10:00:00Z") }],
       },
       {
@@ -162,6 +163,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-23"),
+        tags: [{ name: "Cooking" }, { name: "Dinner" }],
         reminders: [{ reminderTime: new Date("2024-09-22T10:00:00Z") }],
       },
       {
@@ -170,6 +172,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-30"),
+        tags: [{ name: "Photography" }, { name: "Planning" }],
         reminders: [{ reminderTime: new Date("2024-09-29T09:00:00Z") }],
       },
       {
@@ -178,6 +181,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-29"),
+        tags: [{ name: "Running" }, { name: "Events" }],
         reminders: [{ reminderTime: new Date("2024-09-28T09:00:00Z") }],
       },
       {
@@ -186,6 +190,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-10-01"),
+        tags: [{ name: "Travel" }, { name: "Planning" }],
         reminders: [{ reminderTime: new Date("2024-09-30T09:00:00Z") }],
       },
       {
@@ -194,6 +199,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-22"),
+        tags: [{ name: "Writing" }, { name: "Blog" }],
         reminders: [{ reminderTime: new Date("2024-09-21T10:00:00Z") }],
       },
       {
@@ -202,6 +208,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-28"),
+        tags: [{ name: "Cooking" }, { name: "Learning" }],
         reminders: [{ reminderTime: new Date("2024-09-27T09:00:00Z") }],
       },
       {
@@ -210,6 +217,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-10-05"),
+        tags: [{ name: "Food" }, { name: "Events" }],
         reminders: [{ reminderTime: new Date("2024-10-04T09:00:00Z") }],
       },
       {
@@ -218,79 +226,110 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-26"),
+        tags: [{ name: "Social" }, { name: "Planning" }],
         reminders: [{ reminderTime: new Date("2024-09-25T09:00:00Z") }],
       },
     ],
     transactions: [
       {
-        title: "Grocery shopping",
+        description: "Grocery shopping",
         amount: 50.0,
         date: new Date("2024-09-18"),
-        category: "Food",
-        tags: ["Groceries", "Healthy"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Groceries", description: "Everyday food purchases" },
+          { name: "Healthy", description: "Health-conscious choices" },
+        ],
       },
       {
-        title: "Running shoes",
+        description: "Running shoes",
         amount: 120.0,
         date: new Date("2024-09-15"),
-        category: "Sports",
-        tags: ["Fitness", "Equipment"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Fitness", description: "Related to physical fitness" },
+          { name: "Equipment", description: "Sporting gear and tools" },
+        ],
       },
       {
-        title: "Cooking class fee",
+        description: "Cooking class fee",
         amount: 75.0,
         date: new Date("2024-09-10"),
-        category: "Education",
-        tags: ["Cooking", "Learning"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Cooking", description: "Learning culinary skills" },
+          { name: "Learning", description: "Acquiring new knowledge" },
+        ],
       },
       {
-        title: "Dinner party expenses",
+        description: "Dinner party expenses",
         amount: 100.0,
         date: new Date("2024-09-08"),
-        category: "Food",
-        tags: ["Social", "Cooking"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Social", description: "Interacting with others" },
+          { name: "Cooking", description: "Food preparation activities" },
+        ],
       },
       {
-        title: "Photography workshop",
+        description: "Photography workshop",
         amount: 200.0,
         date: new Date("2024-09-05"),
-        category: "Education",
-        tags: ["Photography", "Skills"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Photography", description: "Learning photography skills" },
+          { name: "Skills", description: "Improving personal abilities" },
+        ],
       },
       {
-        title: "Marathon entry fee",
+        description: "Marathon entry fee",
         amount: 50.0,
         date: new Date("2024-08-30"),
-        category: "Sports",
-        tags: ["Fitness", "Events"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Fitness", description: "Physical activity events" },
+          { name: "Events", description: "Organized competitive activities" },
+        ],
       },
       {
-        title: "Cookbook purchase",
+        description: "Cookbook purchase",
         amount: 30.0,
         date: new Date("2024-09-01"),
-        category: "Books",
-        tags: ["Cooking", "Learning"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Cooking", description: "Books on culinary topics" },
+          { name: "Learning", description: "Educational material" },
+        ],
       },
       {
-        title: "Yoga class pass",
+        description: "Yoga class pass",
         amount: 40.0,
         date: new Date("2024-09-03"),
-        category: "Health",
-        tags: ["Fitness", "Wellness"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Fitness", description: "Physical health and well-being" },
+          { name: "Wellness", description: "Holistic health and relaxation" },
+        ],
       },
       {
-        title: "Food festival tickets",
+        description: "Food festival tickets",
         amount: 60.0,
         date: new Date("2024-09-20"),
-        category: "Entertainment",
-        tags: ["Food", "Events"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Food", description: "Culinary experiences" },
+          { name: "Events", description: "Social or public gatherings" },
+        ],
       },
       {
-        title: "New recipe ingredients",
+        description: "New recipe ingredients",
         amount: 25.0,
         date: new Date("2024-09-17"),
-        category: "Food",
-        tags: ["Cooking", "Groceries"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Cooking", description: "Ingredients for preparing food" },
+          { name: "Groceries", description: "Daily food supplies" },
+        ],
       },
     ],
   },
@@ -436,6 +475,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-25"),
+        tags: [{ name: "Reading" }, { name: "Learning" }],
         reminders: [{ reminderTime: new Date("2024-09-24T09:00:00Z") }],
       },
       {
@@ -444,6 +484,7 @@ const userList = [
         status: "IN_PROGRESS",
         priority: 1,
         dueDate: new Date("2024-09-21"),
+        tags: [{ name: "Education" }, { name: "JavaScript" }],
         reminders: [{ reminderTime: new Date("2024-09-20T10:00:00Z") }],
       },
       {
@@ -452,6 +493,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-23"),
+        tags: [{ name: "Writing" }, { name: "Tech" }],
         reminders: [{ reminderTime: new Date("2024-09-22T10:00:00Z") }],
       },
       {
@@ -460,6 +502,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-30"),
+        tags: [{ name: "Networking" }, { name: "Events" }],
         reminders: [{ reminderTime: new Date("2024-09-29T09:00:00Z") }],
       },
       {
@@ -468,6 +511,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-29"),
+        tags: [{ name: "Coding" }, { name: "Challenge" }],
         reminders: [{ reminderTime: new Date("2024-09-28T09:00:00Z") }],
       },
       {
@@ -476,6 +520,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-10-01"),
+        tags: [{ name: "Portfolio" }, { name: "Personal" }],
         reminders: [{ reminderTime: new Date("2024-09-30T09:00:00Z") }],
       },
       {
@@ -484,6 +529,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-27"),
+        tags: [{ name: "Public Speaking" }, { name: "Practice" }],
         reminders: [{ reminderTime: new Date("2024-09-26T10:00:00Z") }],
       },
       {
@@ -492,6 +538,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-28"),
+        tags: [{ name: "Research" }, { name: "Programming" }],
         reminders: [{ reminderTime: new Date("2024-09-27T09:00:00Z") }],
       },
       {
@@ -500,79 +547,117 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-10-02"),
+        tags: [{ name: "Open Source" }, { name: "Planning" }],
         reminders: [{ reminderTime: new Date("2024-10-01T09:00:00Z") }],
       },
     ],
+
     transactions: [
       {
-        title: "Book purchase",
+        description: "Book purchase",
         amount: 20.0,
         date: new Date("2024-09-18"),
-        category: "Books",
-        tags: ["Reading", "Knowledge"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Reading", description: "Books and literature" },
+          { name: "Knowledge", description: "Gaining new knowledge" },
+        ],
       },
       {
-        title: "Online course fee",
+        description: "Online course fee",
         amount: 150.0,
         date: new Date("2024-09-15"),
-        category: "Education",
-        tags: ["Learning", "Tech"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Learning", description: "Acquiring new skills" },
+          { name: "Tech", description: "Technology-related topics" },
+        ],
       },
       {
-        title: "Tech meetup ticket",
+        description: "Tech meetup ticket",
         amount: 30.0,
         date: new Date("2024-09-10"),
-        category: "Networking",
-        tags: ["Tech", "Events"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Tech", description: "Technology-related topics" },
+          { name: "Events", description: "Social or professional events" },
+        ],
       },
       {
-        title: "Gadget purchase",
+        description: "Gadget purchase",
         amount: 200.0,
         date: new Date("2024-09-08"),
-        category: "Electronics",
-        tags: ["Tech", "Equipment"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Tech", description: "Technology-related items" },
+          { name: "Equipment", description: "Tools and gadgets" },
+        ],
       },
       {
-        title: "Coffee with friends",
+        description: "Coffee with friends",
         amount: 15.0,
         date: new Date("2024-09-05"),
-        category: "Food",
-        tags: ["Social", "Networking"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Social", description: "Socializing with others" },
+          {
+            name: "Networking",
+            description: "Building professional relationships",
+          },
+        ],
       },
       {
-        title: "Coding challenge registration",
+        description: "Coding challenge registration",
         amount: 25.0,
         date: new Date("2024-08-30"),
-        category: "Competitions",
-        tags: ["Coding", "Events"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Coding", description: "Programming challenges" },
+          { name: "Events", description: "Competitions or challenges" },
+        ],
       },
       {
-        title: "Webinar fee",
+        description: "Webinar fee",
         amount: 10.0,
         date: new Date("2024-09-01"),
-        category: "Education",
-        tags: ["Learning", "Webinars"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Learning", description: "Acquiring new skills" },
+          { name: "Webinars", description: "Online seminars" },
+        ],
       },
       {
-        title: "Public speaking workshop",
+        description: "Public speaking workshop",
         amount: 100.0,
         date: new Date("2024-09-03"),
-        category: "Education",
-        tags: ["Skills", "Speaking"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Skills", description: "Improving abilities" },
+          { name: "Speaking", description: "Public speaking and presentation" },
+        ],
       },
       {
-        title: "Networking dinner",
+        description: "Networking dinner",
         amount: 80.0,
         date: new Date("2024-09-20"),
-        category: "Food",
-        tags: ["Networking", "Social"],
+        type: "EXPENSE",
+        transactionTags: [
+          {
+            name: "Networking",
+            description: "Building professional relationships",
+          },
+          { name: "Social", description: "Socializing with others" },
+        ],
       },
       {
-        title: "Coding book",
+        description: "Coding book",
         amount: 25.0,
         date: new Date("2024-09-17"),
-        category: "Books",
-        tags: ["Coding", "Learning"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Coding", description: "Books on programming" },
+          { name: "Learning", description: "Acquiring knowledge" },
+        ],
       },
     ],
   },
@@ -718,6 +803,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-25"),
+        tags: [{ name: "Hiking" }, { name: "Planning" }],
         reminders: [{ reminderTime: new Date("2024-09-24T09:00:00Z") }],
       },
       {
@@ -726,6 +812,7 @@ const userList = [
         status: "IN_PROGRESS",
         priority: 1,
         dueDate: new Date("2024-09-21"),
+        tags: [{ name: "Photography" }, { name: "Editing" }],
         reminders: [{ reminderTime: new Date("2024-09-20T10:00:00Z") }],
       },
       {
@@ -734,6 +821,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-23"),
+        tags: [{ name: "Education" }, { name: "Photography" }],
         reminders: [{ reminderTime: new Date("2024-09-22T10:00:00Z") }],
       },
       {
@@ -742,6 +830,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-30"),
+        tags: [{ name: "Volunteer" }, { name: "Environment" }],
         reminders: [{ reminderTime: new Date("2024-09-29T09:00:00Z") }],
       },
       {
@@ -750,6 +839,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-29"),
+        tags: [{ name: "Camping" }, { name: "Research" }],
         reminders: [{ reminderTime: new Date("2024-09-28T09:00:00Z") }],
       },
       {
@@ -758,6 +848,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-10-01"),
+        tags: [{ name: "Photography" }, { name: "Workshop" }],
         reminders: [{ reminderTime: new Date("2024-09-30T09:00:00Z") }],
       },
       {
@@ -766,6 +857,7 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-09-27"),
+        tags: [{ name: "Camping" }, { name: "Preparation" }],
         reminders: [{ reminderTime: new Date("2024-09-26T10:00:00Z") }],
       },
       {
@@ -774,6 +866,7 @@ const userList = [
         status: "PENDING",
         priority: 2,
         dueDate: new Date("2024-09-28"),
+        tags: [{ name: "Photography" }, { name: "Creative" }],
         reminders: [{ reminderTime: new Date("2024-09-27T09:00:00Z") }],
       },
       {
@@ -782,79 +875,113 @@ const userList = [
         status: "PENDING",
         priority: 1,
         dueDate: new Date("2024-10-02"),
+        tags: [{ name: "Travel" }, { name: "Planning" }],
         reminders: [{ reminderTime: new Date("2024-10-01T09:00:00Z") }],
       },
     ],
     transactions: [
       {
-        title: "Camping gear purchase",
+        description: "Camping gear purchase",
         amount: 150.0,
         date: new Date("2024-09-18"),
-        category: "Gear",
-        tags: ["Camping", "Equipment"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Camping", description: "Outdoor camping equipment" },
+          { name: "Equipment", description: "Tools and gear" },
+        ],
       },
       {
-        title: "Photography workshop",
+        description: "Photography workshop",
         amount: 200.0,
         date: new Date("2024-09-15"),
-        category: "Education",
-        tags: ["Photography", "Skills"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Photography", description: "Learning photography skills" },
+          { name: "Skills", description: "Improving technical abilities" },
+        ],
       },
       {
-        title: "Nature retreat",
+        description: "Nature retreat",
         amount: 300.0,
         date: new Date("2024-09-10"),
-        category: "Travel",
-        tags: ["Adventure", "Nature"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Adventure", description: "Exciting outdoor activities" },
+          { name: "Nature", description: "Experiences in natural settings" },
+        ],
       },
       {
-        title: "Hiking guidebook",
+        description: "Hiking guidebook",
         amount: 25.0,
         date: new Date("2024-09-08"),
-        category: "Books",
-        tags: ["Hiking", "Adventure"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Hiking", description: "Guide to hiking trails" },
+          { name: "Adventure", description: "Outdoor exploration" },
+        ],
       },
       {
-        title: "Outdoor workshop fee",
+        description: "Outdoor workshop fee",
         amount: 100.0,
         date: new Date("2024-09-05"),
-        category: "Education",
-        tags: ["Nature", "Skills"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Nature", description: "Workshops in natural settings" },
+          { name: "Skills", description: "Outdoor survival and nature skills" },
+        ],
       },
       {
-        title: "Travel insurance",
+        description: "Travel insurance",
         amount: 50.0,
         date: new Date("2024-08-30"),
-        category: "Insurance",
-        tags: ["Travel", "Safety"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Travel", description: "Insurance for travel safety" },
+          { name: "Safety", description: "Protection against risks" },
+        ],
       },
       {
-        title: "Park entrance fee",
+        description: "Park entrance fee",
         amount: 20.0,
         date: new Date("2024-09-01"),
-        category: "Travel",
-        tags: ["Nature", "Adventure"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Nature", description: "Access to natural parks" },
+          { name: "Adventure", description: "Exploration of natural areas" },
+        ],
       },
       {
-        title: "Photography supplies",
+        description: "Photography supplies",
         amount: 80.0,
         date: new Date("2024-09-03"),
-        category: "Equipment",
-        tags: ["Photography", "Supplies"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Photography", description: "Supplies for photography" },
+          { name: "Supplies", description: "Necessary items for activities" },
+        ],
       },
       {
-        title: "Camping trip expenses",
+        description: "Camping trip expenses",
         amount: 100.0,
         date: new Date("2024-09-20"),
-        category: "Travel",
-        tags: ["Camping", "Adventure"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Camping", description: "Costs related to camping trips" },
+          {
+            name: "Adventure",
+            description: "Outdoor exploration and activities",
+          },
+        ],
       },
       {
-        title: "Trail maps purchase",
+        description: "Trail maps purchase",
         amount: 15.0,
         date: new Date("2024-09-17"),
-        category: "Books",
-        tags: ["Hiking", "Maps"],
+        type: "EXPENSE",
+        transactionTags: [
+          { name: "Hiking", description: "Maps of hiking trails" },
+          { name: "Maps", description: "Guides for navigation" },
+        ],
       },
     ],
   },
@@ -868,7 +995,7 @@ const main = async () => {
   await prisma.transaction.deleteMany();
   await prisma.user.deleteMany();
   await prisma.taskTag.deleteMany();
-  await prisma.habitTag.deleteMany();
+  await prisma.transactionTag.deleteMany();
   await prisma.goalTag.deleteMany();
   await prisma.habitTracking.deleteMany();
   await prisma.goalReminder.deleteMany();
@@ -893,12 +1020,12 @@ const main = async () => {
             amount: transaction.amount,
             description: transaction.description,
             date: transaction.date,
-            transactionTags: {
-              create: transaction.transactionTags.map((tag) => ({
-                name: tag.name,
-                description: tag.description,
-              })),
-            },
+            // transactionTags: {
+            //   create: transaction.tags.map((tag) => ({
+            //     name: tag.name,
+            //     description: tag.description,
+            //   })),
+            // },
           })),
         },
         tasks: {
@@ -908,12 +1035,12 @@ const main = async () => {
             status: task.status,
             priority: task.priority,
             dueDate: task.dueDate,
-            taskTags: {
-              create: task.taskTags.map((tag) => ({
-                name: tag.name,
-                description: tag.description,
-              })),
-            },
+            // taskTags: {
+            //   create: task.tags.map((tag) => ({
+            //     name: tag.name,
+            //     description: tag.description,
+            //   })),
+            // },
           })),
         },
         goals: {
@@ -922,12 +1049,12 @@ const main = async () => {
             description: goal.description,
             priority: goal.priority,
             dueDate: goal.dueDate,
-            taskTags: {
-              create: goal.goalTags.map((tag) => ({
-                name: tag.name,
-                description: tag.description,
-              })),
-            },
+            // taskTags: {
+            //   create: goal.tags.map((tag) => ({
+            //     name: tag.name,
+            //     description: tag.description,
+            //   })),
+            // },
           })),
         },
         habits: {
@@ -935,12 +1062,12 @@ const main = async () => {
             title: habit.title,
             description: habit.description,
             isPublic: habit.isPublic,
-            tracking: {
-              create: habit.tracking.map((track) => ({
-                date: track.date,
-                status: track.status,
-              })),
-            },
+            // tracking: {
+            //   create: habit.tracking.map((track) => ({
+            //     date: track.date,
+            //     status: track.status,
+            //   })),
+            // },
           })),
         },
       },
