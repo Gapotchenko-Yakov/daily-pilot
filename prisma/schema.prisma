@@ -124,7 +124,6 @@ model TaskTag {
   id          String  @id @default(uuid())
   name        String
   description String? // Optional description of the tag
-  taskId      String
   userId      String
   tasks       Task[]
   user        User    @relation(fields: [userId], references: [id])
@@ -134,7 +133,6 @@ model GoalTag {
   id          String  @id @default(uuid())
   name        String
   description String? // Optional description of the tag
-  goalId      String
   userId      String
   goals       Goal[]
   user        User    @relation(fields: [userId], references: [id])
