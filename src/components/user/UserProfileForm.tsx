@@ -45,8 +45,8 @@ export const UserProfileForm = ({ user }: UserFormProps) => {
   });
 
   return (
-    <section className="bg-white dark:bg-gray-700 dark:text-white shadow-lg rounded-lg p-6 mb-6">
-      <h2 className="text-2xl font-semibold mb-4"> User Profile</h2>
+    <section className="card">
+      <h2 className="h2"> User Profile</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
@@ -304,10 +304,7 @@ export const UserProfileForm = ({ user }: UserFormProps) => {
             )}
           />
 
-          <Button
-            className="bg-white dark:bg-gray-800 dark:text-white shadow-lg rounded-lg p-6 mb-6"
-            type="submit"
-          >
+          <Button className="btn btn-primary btn-lg" type="submit">
             Save
           </Button>
         </form>

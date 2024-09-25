@@ -55,8 +55,8 @@ const FinanceFilters = () => {
   }
 
   return (
-    <section className="bg-white dark:bg-gray-700 dark:text-white shadow-lg rounded-lg p-6 mb-6">
-      <h2 className="text-2xl font-semibold mb-4"> Filters</h2>
+    <section className="section-card">
+      <h2 className="h2"> Filters</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -66,10 +66,7 @@ const FinanceFilters = () => {
               <FormItem className="flex flex-col">
                 <FormLabel>Start Date</FormLabel>
                 <Popover>
-                  <PopoverTrigger
-                    asChild
-                    className="bg-gray-200 dark:bg-gray-500 text-gray-600 dark:text-gray-300"
-                  >
+                  <PopoverTrigger asChild className="input">
                     <FormControl>
                       <Button
                         variant="outline"
@@ -114,10 +111,7 @@ const FinanceFilters = () => {
               <FormItem className="flex flex-col">
                 <FormLabel>End Date</FormLabel>
                 <Popover>
-                  <PopoverTrigger
-                    asChild
-                    className="bg-gray-200 dark:bg-gray-500 text-gray-600 dark:text-gray-300"
-                  >
+                  <PopoverTrigger asChild className="input">
                     <FormControl>
                       <Button
                         variant="outline"
@@ -155,10 +149,7 @@ const FinanceFilters = () => {
             )}
           />
 
-          <Button
-            type="submit"
-            className="bg-gray-200 dark:bg-gray-500 text-gray-600 dark:text-gray-300"
-          >
+          <Button type="submit" className="btn-secondary">
             Apply Filters
           </Button>
         </form>

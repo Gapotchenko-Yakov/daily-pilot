@@ -8,22 +8,22 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import prisma from "@/lib/prisma";
-import { Finance, User } from "@prisma/client";
+import { Transaction, User } from "@prisma/client";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 const TransactionsList = async () => {
   await new Promise((resolve, reject) => {
-    setTimeout(() => resolve("data"), 2000);
+    setTimeout(() => resolve("data"), 500);
   });
 
-  const financesRes = await fetch(`${baseUrl}/api/finances`, {
+  const transactionsRes = await fetch(`${baseUrl}/api/transactions`, {
     cache: "no-store",
   });
-  if (!financesRes.ok) {
-    throw new Error("Failed to fetch finances");
+  if (!transactionsRes.ok) {
+    throw new Error("Failed to fetch transactions");
   }
-  const finances: Finance[] = await financesRes.json();
+  const transactions: Transaction[] = await transactionsRes.json();
 
   const usersRes = await fetch(`${baseUrl}/api/users`, { cache: "no-store" });
   if (!usersRes.ok) {
@@ -32,8 +32,8 @@ const TransactionsList = async () => {
   const users: User[] = await usersRes.json();
 
   return (
-    <section className="bg-white dark:bg-gray-700 dark:text-white shadow-lg rounded-lg p-6 mb-6">
-      <h2 className="text-2xl font-semibold mb-4">Recent Transactions</h2>
+    <section className="section-card">
+      <h2 className="h2">Recent Transactions</h2>
       <div className="space-y-4">
         <div className="flex justify-between p-4 border-b border-gray-200 dark:border-gray-600">
           <div>

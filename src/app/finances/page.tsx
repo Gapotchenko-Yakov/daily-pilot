@@ -3,22 +3,23 @@ import FinanceFilters from "@/components/finances/FinanceFilters";
 import FinanceOverview from "@/components/finances/FinanceOverview";
 import TransactionsList from "@/components/finances/TransactionList";
 
-import { Finance, User } from "@prisma/client";
+import { Transaction, User } from "@prisma/client";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 const FinancePage = async () => {
   await new Promise((resolve, reject) => {
-    setTimeout(() => resolve("data"), 2000);
+    setTimeout(() => resolve("data"), 500);
   });
 
-  const financesRes = await fetch(`${baseUrl}/api/finances`, {
+  const transactionsRes = await fetch(`${baseUrl}/api/transactions`, {
     cache: "no-store",
   });
-  if (!financesRes.ok) {
-    throw new Error("Failed to fetch finances");
+
+  if (!transactionsRes.ok) {
+    throw new Error("Failed to fetch transactions");
   }
-  const finances: Finance[] = await financesRes.json();
+  const transactions: Transaction[] = await transactionsRes.json();
 
   const usersRes = await fetch(`${baseUrl}/api/users`, { cache: "no-store" });
   if (!usersRes.ok) {

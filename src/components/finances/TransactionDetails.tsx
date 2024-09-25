@@ -3,7 +3,7 @@ import React from "react";
 const TransactionDetails = () => {
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-semibold mb-4">Transaction Details</h2>
+      <h2 className="h2">Transaction Details</h2>
       <div className="mb-4">
         <h3 className="text-lg font-medium">Transaction #12345</h3>
         <p className="text-gray-600">Date: 2024-09-15</p>
