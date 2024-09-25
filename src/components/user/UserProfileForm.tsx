@@ -17,6 +17,8 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { JsonValue } from "@prisma/client/runtime/library";
 import { User } from "@prisma/client";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
 interface UserFormProps {
   user: User;
@@ -47,6 +49,126 @@ export const UserProfileForm = ({ user }: UserFormProps) => {
       <h2 className="text-2xl font-semibold mb-4"> User Profile</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <br />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <br />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Enter your password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <br />
+          <FormField
+            control={form.control}
+            name="profilePicture"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Profile Picture URL</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter URL of your profile picture"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Please provide a URL to your profile picture.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <br />
+          <FormField
+            control={form.control}
+            name="bio"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Bio</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="Enter a short bio" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <br />
+          <FormField
+            control={form.control}
+            name="settings"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Settings</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Enter your settings in JSON format"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  User settings in JSON format (e.g., theme, notifications).
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <br />
+          <FormField
+            control={form.control}
+            name="preferences"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Preferences</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Enter your preferences in JSON format"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  User preferences in JSON format (e.g., language, timezone).
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <br />
           <FormField
             control={form.control}
             name="createdAt"
@@ -91,7 +213,7 @@ export const UserProfileForm = ({ user }: UserFormProps) => {
               </FormItem>
             )}
           />
-
+          <br />
           <FormField
             control={form.control}
             name="updatedAt"
@@ -136,7 +258,7 @@ export const UserProfileForm = ({ user }: UserFormProps) => {
               </FormItem>
             )}
           />
-
+          <br />
           <FormField
             control={form.control}
             name="lastLogin"
@@ -182,7 +304,12 @@ export const UserProfileForm = ({ user }: UserFormProps) => {
             )}
           />
 
-          <Button type="submit">Save</Button>
+          <Button
+            className="bg-white dark:bg-gray-800 dark:text-white shadow-lg rounded-lg p-6 mb-6"
+            type="submit"
+          >
+            Save
+          </Button>
         </form>
       </Form>
     </section>

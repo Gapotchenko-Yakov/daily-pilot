@@ -6,7 +6,9 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 const UserProfilePage = async () => {
   const userEmail = "alice@example.com";
-  const userRes = await fetch(`${baseUrl}/api/users/${userEmail}`);
+  const userRes = await fetch(`${baseUrl}/api/users/${userEmail}`, {
+    cache: "no-store",
+  });
 
   if (!userRes.ok) {
     throw new Error("Failed to fetch finances");

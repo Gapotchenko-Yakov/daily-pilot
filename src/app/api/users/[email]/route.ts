@@ -6,7 +6,9 @@ export async function GET(
   { params }: { params: { email: string } }
 ) {
   try {
-    const user = prisma.user.findUnique({ where: { email: params.email } });
+    const user = await prisma.user.findUnique({
+      where: { email: params.email },
+    });
     return NextResponse.json(user);
   } catch (error) {
     return NextResponse.error();
