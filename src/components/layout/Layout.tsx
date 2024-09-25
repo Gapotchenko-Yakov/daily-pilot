@@ -1,9 +1,31 @@
 import { FC, ReactNode } from "react";
 import Link from "next/link";
+import {
+  BellIcon,
+  HomeIcon,
+  LogOutIcon,
+  SettingsIcon,
+  UserIcon,
+} from "lucide-react";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface LayoutProps {
   children: ReactNode;
 }
+
+const headerLinks = [
+  { icon: <HomeIcon />, label: "Home", path: "/" },
+  { icon: <UserIcon />, label: "User", path: "/user" },
+  { icon: <SettingsIcon />, label: "Settings", path: "/settings" },
+  { icon: <BellIcon />, label: "Notifications", path: "/notifications" },
+  { icon: <LogOutIcon />, label: "Log Out", path: "/log-out" },
+];
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
@@ -13,16 +35,21 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           <Link href="/" className="text-xl font-bold">
             DailyPilot
           </Link>
-          <div>
-            <Link href="/" className="mx-2">
-              Home
-            </Link>
-            <Link href="/about" className="mx-2">
-              About
-            </Link>
-            <Link href="/contact" className="mx-2">
-              Contact
-            </Link>
+          <div className="flex gap-5">
+            {headerLinks.map(({ icon, label, path }) => (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Link key={label} href={path} className="mx-2">
+                      {icon}
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{label}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ))}
           </div>
         </nav>
       </header>
