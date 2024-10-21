@@ -1078,7 +1078,7 @@ const main = async () => {
       },
     });
 
-    console.log(`Created user: ${createdUser.name}`);
+    // console.log(`Created user: ${createdUser.name}`);
 
     for (const transaction of user.transactions) {
       const createdTransaction = await prisma.transaction.create({
@@ -1097,7 +1097,7 @@ const main = async () => {
           },
         },
       });
-      console.log(`Created transaction: ${createdTransaction.description}`);
+      // console.log(`Created transaction: ${createdTransaction.description}`);
     }
 
     for (const task of user.tasks) {
@@ -1123,7 +1123,7 @@ const main = async () => {
           },
         },
       });
-      console.log(`Created task: ${createdTask.title}`);
+      // console.log(`Created task: ${createdTask.title}`);
     }
 
     for (const goal of user.goals) {
@@ -1148,7 +1148,7 @@ const main = async () => {
           },
         },
       });
-      console.log(`Created goal: ${createdGoal.title}`);
+      // console.log(`Created goal: ${createdGoal.title}`);
     }
 
     for (const habit of user.habits) {
@@ -1166,7 +1166,7 @@ const main = async () => {
           },
         },
       });
-      console.log(`Created habit: ${createdHabit.title}`);
+      // console.log(`Created habit: ${createdHabit.title}`);
     }
   }
 
