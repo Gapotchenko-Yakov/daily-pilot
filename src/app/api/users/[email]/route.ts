@@ -14,5 +14,3 @@ export async function GET(
     return NextResponse.error();
   }
 }
-
-export const dynamic = "force-dynamic"; // defaults to auto
