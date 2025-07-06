@@ -1,11 +1,11 @@
 "use client";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertTitle } from '@mui/material';
 
 const Error = ({ error }: { error: Error }) => {
   return (
-    <Alert className="alert alert-error">
+    <Alert severity="error" variant="outlined">
       <AlertTitle>Error!</AlertTitle>
-      <AlertDescription>{error.message}</AlertDescription>
+      {error.message}
     </Alert>
   );
 };

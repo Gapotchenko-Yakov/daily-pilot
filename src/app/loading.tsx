@@ -1,10 +1,10 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertTitle } from "@mui/material";
 
 export default function Loading() {
   return (
-    <Alert className="alert alert-loading">
+    <Alert severity="info" variant="outlined">
       <AlertTitle>Loading...</AlertTitle>
-      <AlertDescription>On the app level. </AlertDescription>
+      On the app level.
     </Alert>
   );
 }
