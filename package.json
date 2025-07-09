@@ -10,7 +10,8 @@
     "db:seed": "node prisma/seed.js",
     "postinstall": "prisma generate && prisma migrate deploy && npm run db:seed",
     "format": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:unit": "echo test:unit"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
