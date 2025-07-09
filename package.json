@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "db:seed": "node prisma/seed.js",
-    "postinstall": "husky install && prisma generate && prisma migrate deploy && npm run db:seed",
+    "postinstall": "prisma generate && prisma migrate deploy && npm run db:seed",
     "format": "prettier --write .",
     "prepare": "husky install",
     "test:unit": "echo test:unit"
