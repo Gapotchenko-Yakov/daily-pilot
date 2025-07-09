@@ -24,17 +24,24 @@ module.exports = {
         ecmaVersion: 2020,
         sourceType: "module",
         ecmaFeatures: { jsx: true },
+        project: "./tsconfig.json"
+
     },
     settings: {
         react: { version: "detect" },
         "import/resolver": {
             typescript: {
                 project: "./tsconfig.json",
+                alwaysTryTypes: true
             },
-        },
+            node: true
+        }
     },
     rules: {
         "unused-imports/no-unused-imports": "error",
-        // "react/react-in-jsx-scope": "off", // не нужен в Next.js
+        "react/react-in-jsx-scope": "off",
+        "import/no-unresolved": "off",
+        "import/namespace": "off",
+        "import/default": "off",
     },
 };
