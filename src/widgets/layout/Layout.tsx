@@ -16,6 +16,7 @@ import {
     useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { getRandomInt } from "@/shared/lib";
 
 const drawerWidth = 240;
 
