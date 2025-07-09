@@ -38,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
         <div>
             <Toolbar>
                 <Typography variant="h6" noWrap component="div">
-                    Мой сайт 1234
+                    Мой сайт 12345
                 </Typography>
             </Toolbar>
             <Divider />
