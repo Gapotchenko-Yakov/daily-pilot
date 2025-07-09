@@ -1,4 +1,12 @@
 {
+  "ignore": [
+    "node_modules/",
+    ".next/",
+    "dist/",
+    "coverage/",
+    "**/*.config.js",
+    "jest.setup.js"
+  ],
   "singleQuote": true,
   "semi": true,
   "printWidth": 100,

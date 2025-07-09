@@ -1,4 +1,13 @@
 module.exports = {
+    ignorePatterns: [
+        'node_modules/',
+        '.next/',
+        'dist/',
+        'coverage/',
+        '*.config.js',
+        '**/*.config.js', // Рекурсивно для всех config-файлов
+        'jest.setup.js',
+    ],
     root: true,
     parser: "@typescript-eslint/parser",
     plugins: [
