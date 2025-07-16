@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "db:seed": "node prisma/seed.js",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "test:unit": "jest"
+    "test:unit": "jest",
+    "generate": "prisma generate",
+    "build": "prisma generate && next build"
   },
   "dependencies": {
     "@babel/runtime": "^7.27.6",
