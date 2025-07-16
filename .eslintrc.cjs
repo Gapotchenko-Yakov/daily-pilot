@@ -1,4 +1,9 @@
 module.exports = {
+    env: {
+        browser: true,
+        es2021: true,
+        jest: true
+    },
     ignorePatterns: [
         'node_modules/',
         '.next/',
