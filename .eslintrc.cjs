@@ -19,15 +19,14 @@ module.exports = {
         "unused-imports",
     ],
     extends: [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
+        "next/core-web-vitals",
         "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
         "plugin:react-hooks/recommended",
+        "eslint:recommended",
         "plugin:jsx-a11y/recommended",
-        "plugin:import/errors",
-        "plugin:import/warnings",
         "plugin:import/typescript",
-        "prettier", // должен быть последним
+        "prettier"
     ],
     parserOptions: {
         ecmaVersion: 2020,
@@ -52,5 +51,10 @@ module.exports = {
         "import/no-unresolved": "off",
         "import/namespace": "off",
         "import/default": "off",
+        "import/no-duplicates": "off",
+        "import/no-named-as-default": "off",
+        "import/no-named-as-default-member": "off",
+        "unused-imports/no-unused-imports": "error",
+        "@typescript-eslint/no-unused-vars": "error"
     },
 };
