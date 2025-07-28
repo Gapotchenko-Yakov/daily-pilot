@@ -1,4 +1,8 @@
-#!/usr/bin/env sh
-. "$(dirname "$0")/h"
-
 npx lint-staged
+
+# npm run lint:ts
+# npm run lint:scss
+# npm run test:unit
+# npm run build:prod
+# npm run storybook:build
+# npm run test:ui
