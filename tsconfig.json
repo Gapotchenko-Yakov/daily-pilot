@@ -23,6 +23,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "src", "types"],
+  "include": ["next-env.d.ts", "src", "types", "next.config.ts"],
   "exclude": ["node_modules"]
 }
