@@ -2,6 +2,9 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
+const bcrypt = require('bcrypt');
+const { userList } = require('./users');
+
 const main = async () => {
   // Delete old data from all tables
 
@@ -19,11 +22,13 @@ const main = async () => {
   await prisma.user.deleteMany();
 
   for (const user of userList) {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+
     const createdUser = await prisma.user.create({
       data: {
         name: user.name,
         email: user.email,
-        password: user.password,
+        password: hashedPassword,
         profilePicture: user.profilePicture,
         bio: user.bio,
         settings: user.settings,

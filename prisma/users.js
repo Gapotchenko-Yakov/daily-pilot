@@ -1,4 +1,4 @@
-export const userList = [
+const userList = [
   {
     name: 'Alice',
     email: 'alice@example.com',
@@ -1042,3 +1042,5 @@ export const userList = [
     ],
   },
 ];
+
+module.exports = { userList };
