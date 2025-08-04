@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src --ext .ts,.tsx --fix",
+    "db:seed": "node prisma/seed.js",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\" \"*.{js,json,md}\"",
     "prepare": "husky install",
     "test:unit": "jest",
-    "test:unit:watch": "jest --watch"
+    "test:unit:watch": "jest --watch",
+    "generate": "prisma generate",
+    "build": "prisma generate && next build"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -26,6 +28,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.2.0",
     "@mui/material": "^7.2.0",
+    "@prisma/client": "^6.13.0",
     "next": "15.4.4",
     "react": "19.1.0",
     "react-dom": "19.1.0"
@@ -50,6 +53,7 @@
     "jest-environment-jsdom": "^30.0.5",
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2",
+    "prisma": "^6.13.0",
     "ts-jest": "^29.4.0",
     "typescript": "^5"
   }

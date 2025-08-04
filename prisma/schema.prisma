@@ -1,0 +1,155 @@
+// Generator Configuration
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+}
+
+// Data Source Configuration
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+enum TaskStatus {
+  PENDING
+  COMPLETED
+  IN_PROGRESS
+  ON_HOLD
+}
+
+enum HabitStatus {
+  PENDING
+  COMPLETED
+  SKIPPED
+  MISSED
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+model User {
+  id              String           @id @default(uuid())
+  name            String
+  email           String           @unique
+  password        String
+  profilePicture  String? // URL to the profile picture
+  bio             String? // Short biography of the user
+  settings        Json? // User settings (e.g., theme, notifications)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  lastLogin       DateTime?
+  preferences     Json? // User preferences (e.g., language, timezone)
+  tasks           Task[]
+  goals           Goal[]
+  habits          Habit[]
+  taskTags        TaskTag[]
+  goalTags        GoalTag[]
+  transactionTags TransactionTag[]
+  transactions    Transaction[]
+}
+
+model Task {
+  id          String         @id @default(uuid())
+  userId      String
+  goalId      String?
+  title       String
+  description String?
+  status      TaskStatus // Enum for status
+  priority    Int            @default(1) // 1 to 100
+  dueDate     DateTime?
+  createdAt   DateTime       @default(now())
+  user        User           @relation(fields: [userId], references: [id])
+  goal        Goal?          @relation(fields: [goalId], references: [id])
+  reminders   TaskReminder[]
+  tags        TaskTag[]
+}
+
+model Goal {
+  id          String         @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  priority    Int            @default(1) // 1 to 100
+  dueDate     DateTime?
+  createdAt   DateTime       @default(now())
+  user        User           @relation(fields: [userId], references: [id])
+  tasks       Task[]
+  reminders   GoalReminder[]
+  tags        GoalTag[]
+}
+
+model Habit {
+  id          String          @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  isPublic    Boolean         @default(false)
+  createdAt   DateTime        @default(now())
+  user        User            @relation(fields: [userId], references: [id])
+  tracking    HabitTracking[]
+}
+
+model HabitTracking {
+  id      String      @id @default(uuid())
+  habitId String
+  date    DateTime
+  status  HabitStatus // Enum for status
+  habit   Habit       @relation(fields: [habitId], references: [id])
+}
+
+model Transaction {
+  id              String           @id @default(uuid())
+  userId          String?
+  type            TransactionType // Enum for type
+  amount          Float
+  description     String? // Optional description of the transaction
+  date            DateTime
+  user            User?            @relation(fields: [userId], references: [id])
+  transactionTags TransactionTag[]
+}
+
+model TransactionTag {
+  id           String        @id @default(uuid())
+  name         String
+  description  String? // Optional description of the tag
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  transactions Transaction[]
+}
+
+model TaskTag {
+  id          String  @id @default(uuid())
+  name        String
+  description String? // Optional description of the tag
+  userId      String
+  tasks       Task[]
+  user        User    @relation(fields: [userId], references: [id])
+}
+
+model GoalTag {
+  id          String  @id @default(uuid())
+  name        String
+  description String? // Optional description of the tag
+  userId      String
+  goals       Goal[]
+  user        User    @relation(fields: [userId], references: [id])
+}
+
+model TaskReminder {
+  id           String   @id @default(uuid())
+  taskId       String
+  reminderTime DateTime
+  createdAt    DateTime @default(now())
+  task         Task     @relation(fields: [taskId], references: [id])
+}
+
+model GoalReminder {
+  id           String   @id @default(uuid())
+  goalId       String
+  reminderTime DateTime
+  createdAt    DateTime @default(now())
+  goal         Goal     @relation(fields: [goalId], references: [id])
+}
