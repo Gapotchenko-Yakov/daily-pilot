@@ -24,11 +24,12 @@
     ]
   },
   "include": [
+    "jest.setup.ts",
     "next-env.d.ts",
+    "next.config.ts",
     "src",
     "types",
-    "next.config.ts",
-    "jest.setup.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
