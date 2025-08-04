@@ -1,0 +1,30 @@
+name: Next.js CI/CD  
+on: [push]  
+
+jobs:  
+  test-and-deploy:  
+    runs-on: ubuntu-latest  
+    steps:  
+      - uses: actions/checkout@v4  
+      - uses: actions/setup-node@v4  
+        with:  
+          node-version: 20  
+      - run: npm install  
+      - run: npm run test:unit
+      - run: npm run build  
+
+      # Деплой в Vercel  
+      - name: Install Vercel CLI  
+        run: npm install -g vercel@latest  
+
+      - name: Deploy to Vercel  
+        run: |  
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then  
+            vercel --prod --token ${{ secrets.VERCEL_TOKEN }}  
+          else  
+            vercel --token ${{ secrets.VERCEL_TOKEN }}  
+          fi  
+        env:  
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}  
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}  
