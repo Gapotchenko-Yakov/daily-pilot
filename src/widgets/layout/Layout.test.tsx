@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { renderWithTestProviders } from '@/shared/lib/tests';
+import { screen } from '@testing-library/react';
 import Layout from './Layout';
-import React from 'react';
 
 test('renders button', () => {
-  render(<Layout>Layout</Layout>);
-  const elements = screen.getAllByText('Главная');
+  renderWithTestProviders(<Layout>Layout</Layout>);
+  const elements = screen.getAllByText(/Главная/i);
   expect(elements.length).toBeGreaterThan(0);
 });
