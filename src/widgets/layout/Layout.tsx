@@ -16,6 +16,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import LogoutButton from '../logout/LogoutButton';
 
 const drawerWidth = 240;
 
@@ -72,9 +73,10 @@ export default function Layout({ children }: LayoutProps) {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" flexGrow={1}>
             DailyPilot
           </Typography>
+          <LogoutButton />
         </Toolbar>
       </AppBar>
 
