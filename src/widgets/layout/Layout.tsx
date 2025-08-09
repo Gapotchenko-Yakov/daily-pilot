@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutButton from '../logout/LogoutButton';
+import { ThemeToggleButton } from '@/shared/ui';
 
 const drawerWidth = 240;
 
@@ -76,6 +77,7 @@ export default function Layout({ children }: LayoutProps) {
           <Typography variant="h6" noWrap component="div" flexGrow={1}>
             DailyPilot
           </Typography>
+          <ThemeToggleButton />
           <LogoutButton />
         </Toolbar>
       </AppBar>
